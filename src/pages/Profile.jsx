@@ -1,120 +1,137 @@
-import { FaPlay, FaHeart } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 export default function Profile() {
-  // Datos mockeados (luego irán desde backend)
-  const audios = [
-    {
-      id: 1,
-      title: "Noche en El Gòtic",
-      duration: "2:34",
-      likes: 158,
-      img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800",
-    },
-    {
-      id: 2,
-      title: "Olas en la Barceloneta",
-      duration: "4:12",
-      likes: 302,
-      img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
-    },
-    {
-      id: 3,
-      title: "Campanas de la Catedral",
-      duration: "1:55",
-      likes: 98,
-      img: "https://images.unsplash.com/photo-1506801310323-534be5e7f6c9?q=80&w=800",
-    },
-    {
-      id: 4,
-      title: "Música en el Raval",
-      duration: "5:01",
-      likes: 450,
-      img: "https://images.unsplash.com/photo-1502462042370-146aa6b5ab5d?q=80&w=800",
-    },
-  ];
+  const [user, setUser] = useState(null);
+  const [mySounds, setMySounds] = useState([]);
+  const [editing, setEditing] = useState(null);
+  const [tempDescription, setTempDescription] = useState("");
+
+  // Cargar usuario
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/auth/me");
+        setUser(res.data);
+      } catch (err) {
+        console.error("Error cargando usuario:", err);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  // Cargar sonidos
+  const loadMySounds = async () => {
+    try {
+      const res = await api.get("/api/sounds/me");
+      setMySounds(res.data);
+    } catch (err) {
+      console.error("Error cargando mis sonidos:", err);
+    }
+  };
+
+  useEffect(() => {
+    loadMySounds();
+  }, []);
+
+  // Borrar sonido
+  const deleteSound = async (id) => {
+    if (!confirm("¿Seguro que quieres eliminar este sonido?")) return;
+
+    try {
+      await api.delete(`/api/sounds/${id}`);
+      loadMySounds();
+    } catch (err) {
+      alert("No se pudo borrar.");
+    }
+  };
+
+  // Guardar descripción sin tocar backend
+  const saveDescription = (id) => {
+    const updated = mySounds.map((s) =>
+      s.id === id ? { ...s, description: tempDescription } : s
+    );
+    setMySounds(updated);
+    setEditing(null);
+  };
+
+  if (!user)
+    return <div className="text-white text-center mt-20">Cargando…</div>;
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-[#2d2153] to-[#241b45] text-white flex flex-col">
+      <NavBar />
 
-      <main className="max-w-7xl mx-auto">
+      <main className="flex-grow px-8 py-12 max-w-5xl mx-auto">
 
-        <div className="flex flex-col lg:flex-row gap-10">
-
-          {/* PROFILE CARD */}
-          <aside className="bg-[#241f2e] rounded-3xl p-8 w-full lg:w-80 shadow-xl border border-white/5">
-            <img
-              src="https://i.pravatar.cc/300"
-              alt="User"
-              className="w-40 h-40 rounded-full mx-auto mb-4"
-            />
-            <h2 className="text-center text-2xl font-bold">AnaDev</h2>
-            <p className="text-center text-gray-400 text-sm mb-4">
-              Capturando la sinfonía urbana de Barcelona.
-            </p>
-
-            <p className="bg-purple-600/40 px-4 py-2 rounded-lg text-center font-semibold mb-4">
-              {audios.length} Audios Subidos
-            </p>
-
-            {/* Puedes borrarlo si no lo quieres */}
-            <button className="bg-black w-full py-2 rounded-lg hover:bg-black/80 transition">
-              Editar Perfil
-            </button>
-          </aside>
-
-          {/* MAIN CONTENT */}
-          <section className="flex-1">
-
-            {/* TÍTULO */}
-            <div className="flex gap-8 border-b border-white/10 pb-2 mb-6">
-              <button className="text-purple-400 border-b-2 border-purple-400 pb-1">
-                Mis Audios
-              </button>
-            </div>
-
-            {/* AUDIO GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-              {audios.map((audio) => (
-                <article
-                  key={audio.id}
-                  className="bg-[#241f2e] rounded-2xl overflow-hidden shadow-lg border border-white/5 hover:scale-[1.02] transition-all"
-                >
-                  <div className="relative">
-                    <img
-                      src={audio.img}
-                      alt={audio.title}
-                      className="w-full h-44 object-cover"
-                    />
-
-                    {/* PLAY BUTTON EN LA IMAGEN */}
-                    <button className="absolute bottom-3 right-3 bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg">
-                      <FaPlay size={14} />
-                    </button>
-                  </div>
-
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">{audio.title}</h3>
-
-                    <div className="flex items-center justify-between text-gray-300 text-sm">
-                      <span>⏱ {audio.duration}</span>
-
-                      <span className="flex items-center gap-1">
-                        <FaHeart className="text-pink-400" />
-                        {audio.likes}
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-
-            </div>
-
-          </section>
-
+        <div className="bg-[#1f1a33]/60 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
+          <h1 className="text-4xl font-extrabold mb-3">{user.username}</h1>
+          <p className="text-gray-300">{user.email}</p>
+          <p className="mt-4 text-purple-300">Audios subidos: {mySounds.length}</p>
         </div>
 
+        <h2 className="text-xl font-bold mt-10 mb-4">Mis sonidos</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          {mySounds.map((sound) => (
+            <div
+              key={sound.id}
+              className="bg-[#1f1730]/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-purple-500/20"
+            >
+              <h3 className="text-lg font-semibold">{sound.title}</h3>
+
+              {editing === sound.id ? (
+                <textarea
+                  value={tempDescription}
+                  onChange={(e) => setTempDescription(e.target.value)}
+                  className="w-full mt-2 bg-black/20 p-2 rounded-lg text-white"
+                />
+              ) : (
+                <p className="text-gray-300 text-sm mt-2">
+                  {sound.description || "Sin descripción"}
+                </p>
+              )}
+
+              <audio controls className="w-full mt-3">
+                <source
+                  src={`http://localhost:8080/api/sounds/audio/${sound.id}`}
+                  type="audio/mpeg"
+                />
+              </audio>
+
+              {editing === sound.id ? (
+                <button
+                  onClick={() => saveDescription(sound.id)}
+                  className="mt-4 bg-blue-500 px-4 py-2 rounded-lg w-full"
+                >
+                  Guardar descripción
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setEditing(sound.id);
+                    setTempDescription(sound.description || "");
+                  }}
+                  className="mt-4 bg-blue-500 px-4 py-2 rounded-lg w-full"
+                >
+                  Editar descripción
+                </button>
+              )}
+
+              <button
+                onClick={() => deleteSound(sound.id)}
+                className="mt-2 bg-red-600 px-4 py-2 rounded-lg w-full"
+              >
+                Eliminar
+              </button>
+            </div>
+          ))}
+        </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

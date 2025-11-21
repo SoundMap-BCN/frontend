@@ -9,7 +9,7 @@ export default function Profile() {
   const [editing, setEditing] = useState(null);
   const [tempDescription, setTempDescription] = useState("");
 
-  // Cargar usuario
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -22,7 +22,7 @@ export default function Profile() {
     fetchUser();
   }, []);
 
-  // Cargar sonidos
+
   const loadMySounds = async () => {
     try {
       const res = await api.get("/api/sounds/me");
@@ -36,7 +36,7 @@ export default function Profile() {
     loadMySounds();
   }, []);
 
-  // Borrar sonido
+  
   const deleteSound = async (id) => {
     if (!confirm("¿Seguro que quieres eliminar este sonido?")) return;
 
@@ -48,7 +48,7 @@ export default function Profile() {
     }
   };
 
-  // Guardar descripción sin tocar backend
+
   const saveDescription = (id) => {
     const updated = mySounds.map((s) =>
       s.id === id ? { ...s, description: tempDescription } : s

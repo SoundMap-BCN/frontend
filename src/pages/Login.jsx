@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -28,10 +27,10 @@ export default function Login() {
 
       const res = await api.post("/auth/login", { email, password });
 
-      // Guardar token
+   
       localStorage.setItem("token", res.data.token);
 
-      // Redirigir al mapa
+     
       navigate("/explorar");
 
     } catch (error) {
@@ -45,12 +44,10 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white flex flex-col">
 
-      {/* HEADER */}
       <header role="banner">
         <NavBar />
       </header>
 
-      {/* MAIN */}
       <main
         role="main"
         className="flex-grow flex items-center justify-center px-4"
@@ -61,7 +58,7 @@ export default function Login() {
         >
           <h1 className="text-center mb-8 text-lg font-semibold">Iniciar Sesión</h1>
 
-          {/* EMAIL */}
+         
           <label className="block mb-4 text-sm text-gray-300">
             Correo electrónico
             <input
@@ -73,7 +70,7 @@ export default function Login() {
             />
           </label>
 
-          {/* PASSWORD */}
+          
           <label className="block mb-6 text-sm text-gray-300">
             Contraseña
             <div className="relative">
@@ -109,7 +106,7 @@ export default function Login() {
         </form>
       </main>
 
-      {/* FOOTER */}
+
       <footer role="contentinfo">
         <Footer />
       </footer>

@@ -34,7 +34,7 @@ export default function Register() {
         password,
       });
 
-      alert("Cuenta creada correctamente 🎉");
+      alert("Cuenta creada correctamente");
       navigate("/login");
 
     } catch (error) {
@@ -46,17 +46,17 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white flex flex-col">
 
-      {/* HEADER */}
+   
       <header role="banner">
         <NavBar />
       </header>
 
-      {/* MAIN */}
+    
       <main className="flex-grow flex items-center justify-center py-16 px-4">
 
         <div className="bg-[#241f2e] w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-white/5">
 
-          {/* LEFT PANEL */}
+          
           <div className="bg-gradient-to-br from-purple-400 to-purple-600 p-10 flex flex-col justify-center text-center">
             <h2 className="text-3xl font-extrabold text-white mb-4 drop-shadow-lg">
               Únete a SoundMap BCN
@@ -67,12 +67,12 @@ export default function Register() {
             <div className="text-6xl opacity-70">🎧</div>
           </div>
 
-          {/* RIGHT PANEL */}
+         
           <div className="p-10 bg-[#1d1925] flex flex-col justify-center">
 
             <h1 className="text-2xl font-bold mb-8 text-center">Crear Cuenta</h1>
 
-            {/* USERNAME */}
+           
             <label className="block mb-4 text-sm text-gray-300">
               Nombre de usuario
               <input
@@ -84,7 +84,7 @@ export default function Register() {
               />
             </label>
 
-            {/* EMAIL */}
+         
             <label className="block mb-4 text-sm text-gray-300">
               Correo electrónico
               <input
@@ -96,7 +96,7 @@ export default function Register() {
               />
             </label>
 
-            {/* PASSWORD */}
+           
             <label className="block mb-4 text-sm text-gray-300">
               Contraseña
               <div className="relative">
@@ -113,12 +113,12 @@ export default function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-5 text-gray-400 hover:text-gray-200"
                 >
-                  👁
+                  
                 </button>
               </div>
             </label>
 
-            {/* CONFIRM PASSWORD */}
+           
             <label className="block mb-6 text-sm text-gray-300">
               Confirmar Contraseña
               <div className="relative">
@@ -135,18 +135,18 @@ export default function Register() {
                   onClick={() => setShowPassword2(!showPassword2)}
                   className="absolute right-3 top-5 text-gray-400 hover:text-gray-200"
                 >
-                  👁
+                  
                 </button>
               </div>
             </label>
 
-            {/* TERMS */}
+          
             <label className="flex items-center gap-2 text-sm text-gray-300 mb-6 cursor-pointer">
               <input type="checkbox" className="accent-purple-500" />
               Acepto los términos y condiciones
             </label>
 
-            {/* SUBMIT */}
+           
             <button
               onClick={handleRegister}
               className="w-full bg-purple-500 hover:bg-purple-600 transition-all py-3 rounded-lg font-semibold"
@@ -166,7 +166,7 @@ export default function Register() {
 
       </main>
 
-      {/* FOOTER */}
+    
       <footer role="contentinfo">
         <Footer />
       </footer>

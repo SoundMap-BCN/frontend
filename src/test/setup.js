@@ -1,0 +1,9 @@
+import '@testing-library/jest-dom';
+
+Object.defineProperty(window, "localStorage", {
+  value: {
+    getItem: vi.fn(() => null),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+  },
+});

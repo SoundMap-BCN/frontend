@@ -1,23 +1,42 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+ 
+  useEffect(() => {
+    const checkToken = () => setToken(localStorage.getItem("token"));
+    window.addEventListener("storage", checkToken);
+    return () => window.removeEventListener("storage", checkToken);
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("token");
+    setToken(null);
     navigate("/login");
   };
 
   return (
     <nav className="w-full px-8 py-4 flex justify-between items-center bg-[#0f0b1c] text-white">
-      <Link to="/explorar" className="font-bold text-lg">SoundMap BCN</Link>
+      <Link to="/" className="font-bold text-lg">SoundMap BCN</Link>
 
       <div className="flex gap-6 items-center">
         <Link to="/explorar">Explorar</Link>
         <Link to="/subir-audio">Subir Audio</Link>
 
-        {/* Si NO hay token → Log in + Sign in */}
+        
+        {token && (
+          <Link
+            to="/profile"
+            className="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold transition"
+          >
+            Tu perfil
+          </Link>
+        )}
+
+        
         {!token && (
           <div className="flex gap-4">
             <Link
@@ -36,7 +55,6 @@ export default function NavBar() {
           </div>
         )}
 
-        {/* Si HAY token → botón de Cerrar sesión */}
         {token && (
           <button
             onClick={logout}
@@ -49,4 +67,3 @@ export default function NavBar() {
     </nav>
   );
 }
-q

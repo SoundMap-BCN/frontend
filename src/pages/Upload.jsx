@@ -20,7 +20,7 @@ export default function Upload() {
   const leafletMap = useRef(null);
   const markerRef = useRef(null);
 
-  // Inicializar mapa al abrir el modal
+
   useEffect(() => {
     if (showModal && mapRef.current && !leafletMap.current) {
       leafletMap.current = L.map(mapRef.current).setView([41.3874, 2.1686], 13);
@@ -41,7 +41,7 @@ export default function Upload() {
     setShowModal(false);
   };
 
-  // 🔥 SUBIR AUDIO AL BACKEND
+  
   const handleUpload = async () => {
     if (!audioFile || !title || !coords.lat) {
       alert("Faltan datos obligatorios.");
@@ -53,7 +53,6 @@ export default function Upload() {
 
       const formData = new FormData();
 
-      // 📌 FORMATO EXACTO QUE ESPERA SPRING
       const data = {
         title,
         description,
@@ -96,14 +95,14 @@ export default function Upload() {
       </header>
 
       <main className="flex-grow px-8 py-12">
-        <h1 className="text-3xl font-extrabold mb-10">Sube tu Sonido Urbano</h1>
+  
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
 
-          {/* CARD UPLOAD */}
+          
           <div className="bg-[#372a54] p-6 rounded-xl shadow-lg">
 
-            {/* INPUT FILE */}
+           
             <div className="border-2 border-dashed border-purple-400/40 rounded-xl p-8 text-center mb-6">
               <p className="text-purple-200 mb-3 font-semibold">Arrastra tu archivo aquí</p>
 
@@ -129,7 +128,7 @@ export default function Upload() {
               )}
             </div>
 
-            {/* TITLE */}
+           
             <label className="text-sm">Título</label>
             <input
               type="text"
@@ -139,7 +138,7 @@ export default function Upload() {
               onChange={(e) => setTitle(e.target.value)}
             />
 
-            {/* DESCRIPTION */}
+           
             <label className="text-sm">Descripción</label>
             <textarea
               placeholder="Describe el ambiente grabado"
@@ -148,7 +147,7 @@ export default function Upload() {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
 
-            {/* BOTÓN UBICACIÓN */}
+           
             <button
               onClick={() => setShowModal(true)}
               className="w-full bg-purple-600 hover:bg-purple-700 transition mt-6 py-3 rounded-lg font-semibold"
@@ -156,14 +155,14 @@ export default function Upload() {
               Seleccionar ubicación
             </button>
 
-            {/* COORDENADAS */}
+       
             {coords.lat && (
               <p className="text-xs text-purple-200 mt-3">
                 Ubicación: {coords.lat.toFixed(5)}, {coords.lng.toFixed(5)}
               </p>
             )}
 
-            {/* SUBIR */}
+           
             <button
               className="w-full bg-purple-500 text-white font-bold mt-6 py-3 rounded-lg shadow-lg hover:bg-purple-600"
               onClick={handleUpload}
@@ -173,7 +172,6 @@ export default function Upload() {
             </button>
           </div>
 
-          {/* PANEL INFO */}
           <div className="bg-[#372a54] p-6 rounded-xl shadow-lg">
             <h2 className="font-semibold mb-3 text-purple-200">Geolocalización</h2>
             <p className="text-xs mb-4 text-gray-300">
@@ -193,7 +191,7 @@ export default function Upload() {
           </div>
         </div>
 
-        {/* MODAL MAPA */}
+       
         {showModal && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-[#1f1633] p-6 rounded-2xl shadow-xl max-w-xl w-full">

@@ -9,12 +9,12 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white flex flex-col">
 
-      {/* Skip to main content */}
+      
       <a 
         href="#main-content"
         className="absolute top-[-40px] left-0 bg-white text-black px-4 py-2 z-50 focus:top-0 transition-all"
       >
-        Skip to main content
+        
       </a>
 
       <header role="banner">
@@ -23,12 +23,12 @@ export default function Landing() {
 
       <main id="main-content" role="main" className="flex-grow">
 
-        {/* HERO */}
+        
         <section 
           aria-labelledby="hero-title"
           className="max-w-5xl mx-auto bg-[#b47bff] bg-gradient-to-br from-purple-400 to-purple-600 mt-10 rounded-3xl px-10 py-20 relative overflow-hidden shadow-xl"
         >
-          {/* Soft circles */}
+         
           <div
             aria-hidden="true"
             className="absolute top-10 left-5 w-40 h-40 bg-white/20 rounded-full blur-3xl opacity-40"
@@ -40,54 +40,54 @@ export default function Landing() {
           ></div>
 
           <h1 id="hero-title" className="text-4xl md:text-5xl font-extrabold mb-4 text-white drop-shadow">
-            The Sound of Barcelona
+            El sonido de Barcelona
           </h1>
 
           <p className="max-w-xl text-white/90 mb-10 text-lg">
-            Your guide to the city’s unique soundscapes. Explore, record, and share the vibes of Barcelona!
+            Tu guia para las melodias únicas de Barcelona. Explora, graba y comparte la vibra!
           </p>
 
           <div className="flex gap-6 flex-wrap">
 
-            {/* BUTTON → /explorar */}
+            
             <button
               aria-label="Explore the map of Barcelona sounds"
               onClick={() => navigate("/explorar")}
               className="flex items-center gap-2 bg-white text-gray-900 font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-purple-900/40 transition-all"
             >
               <FaMapMarkerAlt aria-hidden="true" className="text-gray-700" />
-              <span>Explore the Map</span>
+              <span>Explora el Mapa</span>
             </button>
 
-            {/* BUTTON → /subir-audio */}
+            
             <button
               aria-label="Add your own sound to the map"
               onClick={() => navigate("/subir-audio")}
               className="flex items-center gap-2 bg-black text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:bg-black/80 transition-all"
             >
               <FaMicrophone aria-hidden="true" />
-              <span>Add Your Sound</span>
+              <span>Añade tu sonido</span>
             </button>
 
           </div>
         </section>
 
-        {/* HOW IT WORKS */}
+        
         <section
           aria-labelledby="how-title"
           className="max-w-5xl mx-auto px-6 mt-24 mb-32"
         >
           <p className="text-purple-300 uppercase text-sm tracking-wide text-center">
-            How it works
+            Como funciona
           </p>
 
           <h2 id="how-title" className="text-3xl font-extrabold text-center mt-2 mb-6">
-            Map the Vibe in 3 Easy Steps
+            Mapea la vibra en 3 pasos
           </h2>
 
           <p className="text-gray-300 text-center max-w-2xl mx-auto mb-14">
-            Join our community and help build a collective auditory archive of the city.
-            It’s simple, fun, and makes you part of Barcelona’s story.
+            Unete a la comunidad y añuda a construi una coleccion de música.
+            Es simple, divertido y te hace formar parte de la historia de Barcelona.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -97,10 +97,10 @@ export default function Landing() {
                 <FaMicrophone aria-hidden="true" className="text-purple-200" />
               </div>
               <h3 id="step1-title" className="font-semibold mb-2 text-lg">
-                Record & Upload
+                Grabalo & subelo
               </h3>
               <p className="text-gray-400 text-sm">
-                Capture a city sound with your phone. Every sound tells a story.
+                Captura un sonido de la ciudad. Cada canción cuenta una historia.
               </p>
             </article>
 
@@ -112,7 +112,7 @@ export default function Landing() {
                 Pin on the Map
               </h3>
               <p className="text-gray-400 text-sm">
-                Drop a pin exactly where you recorded it.
+                Agrega el sonido exactamente donde lo escuchaste
               </p>
             </article>
 
@@ -121,10 +121,10 @@ export default function Landing() {
                 <FaPlay aria-hidden="true" className="text-purple-200" />
               </div>
               <h3 id="step3-title" className="font-semibold mb-2 text-lg">
-                Explore & Listen
+                Explora & escucha
               </h3>
               <p className="text-gray-400 text-sm">
-                Discover sounds shared by the community.
+                descubre los sonidos compartidos por la comunidad.
               </p>
             </article>
 

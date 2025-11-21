@@ -23,7 +23,7 @@ El proyecto se compone de:
 | **Base de Datos** | PostgreSQL |
 | **Autenticación** | JWT |
 | **API Client** | Axios + Interceptor |
-| **Testing** | Postman |
+| **Testing** | Vitest|
 | **Diseño** | Figma |
 | **Gestión de Proyecto** | Trello |
 
